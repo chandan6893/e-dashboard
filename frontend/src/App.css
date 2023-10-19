@@ -23,6 +23,7 @@ body{
 .Nav ul {
   height: 4rem;
   display: flex;
+  flex-wrap: wrap;
   text-decoration: none;
   list-style: none;
   justify-content: space-between;

@@ -25,7 +25,7 @@ const  logout=()=>{
         <li>
           <Link to="/profile">Profile</Link>
         </li>
-        <li>
+        {/* <li>
           {auth ? (
             <Link to="/signup" onClick={logout}>
               Logout
@@ -33,9 +33,24 @@ const  logout=()=>{
           ) : (
             <Link to="/signup">SignUp</Link>
           )}
-        </li>
+        </li> */}
         <li>
-          <Link to="/login">Login</Link>
+          {auth ? (
+            <li>
+              <Link to="/signup" onClick={logout}>
+                Logout
+              </Link>
+            </li>
+          ) : (
+            <>
+              <li>
+                <Link to="/signup">SignUp</Link>
+              </li>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+            </>
+          )}
         </li>
       </ul>
     </div>
