@@ -72,4 +72,41 @@ body{
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  color: #fff;
+}
+
+/* Login */
+.Login{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  margin-top: 7.5rem;
+  align-items: center;
+  background-color: #fff;
+  width: 100vw;
+  height: 81vh;
+  gap: 20px;
+}
+.LoginHeading{
+  color: royalblue;
+}
+
+.LoginInputBox{
+width: 28rem;
+  height: 40px;
+  padding: 0 0 0 20px;
+  border:1px solid royalblue;
+  border-radius: 3px;
+  outline: none;
+}
+.LoginBtn{
+  width: 8rem;
+  height: 2.4rem;
+  padding: 4px;
+  font-size: large;
+  background-color: royalblue;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
 }
