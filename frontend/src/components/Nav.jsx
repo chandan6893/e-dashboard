@@ -12,13 +12,15 @@ const  logout=()=>{
 
   return (
     <div className="Nav">
-      <img
-        src="https://s3u.tmimgcdn.com/u8265365/49e7f3f6c7a60ec8b0aea61cd17de1f5.jpg"
-        alt="Logo"
-        className="NavLogo"
-      />
       {auth ? (
         <ul className="ProductNavContainer1">
+          <li>
+            <img
+              src="https://s3u.tmimgcdn.com/u8265365/49e7f3f6c7a60ec8b0aea61cd17de1f5.jpg"
+              alt="Logo"
+              className="NavLogo"
+            />
+          </li>
           <li>
             <Link to="/">products</Link>
           </li>
@@ -40,6 +42,11 @@ const  logout=()=>{
         </ul>
       ) : (
         <div className="Container2">
+          <img
+            src="https://s3u.tmimgcdn.com/u8265365/49e7f3f6c7a60ec8b0aea61cd17de1f5.jpg"
+            alt="Logo"
+            className="NavLogo"
+          />
           <div className="ProductsSignUpLogin">
             <div>
               <Link to="/signup">SignUp</Link>

@@ -8,7 +8,7 @@ body{
 }
 .Nav{
   width: 100vw;
-  
+  /* height: 4rem; */
 }
 .NavLogo{
   width: 4rem;
