@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import SignUp from "./components/SignUp";
-import Login from "./components/Login"
+import Login from "./components/Login";
+import AddProduct from "./components/AddProduct";
 import "./App.css";
 import PrivateComponent from "./components/PrivateComponent";
 function App() {
@@ -14,7 +15,7 @@ function App() {
         <Routes>
           <Route element={<PrivateComponent />}>
             <Route path="/" element={<h1>products listing component</h1>} />
-            <Route path="/add" element={<h1>Add product component</h1>} />
+            <Route path="/add" element={<AddProduct />} />
             <Route
               path="/update"
               element={<h1>Update products component</h1>}
