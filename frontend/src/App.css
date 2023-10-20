@@ -10,6 +10,12 @@ body{
   width: 100vw;
   
 }
+.NavLogo{
+  width: 4rem;
+  float: left;
+  border-radius: 50%;
+  margin: 10px 0 0 20px;
+}
 .Nav ul li{
   margin: 0 60px 0 60px;
   font-size: large;
@@ -80,7 +86,6 @@ body{
 .Login{
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   margin-top: 7.5rem;
   align-items: center;
   background-color: #fff;
@@ -110,4 +115,28 @@ width: 28rem;
   border-radius: 4px;
   cursor: pointer;
   color: #fff;
+}
+
+/* signup and login */
+a{
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+.ProductsSignUpLogin{
+  background-color: royalblue;
+  font-size: large;
+  font-weight: bold;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 2rem;
+  gap: 2rem;
+}
+.Container2{
+  background-color: royalblue;
+  font-size: large;
+  font-weight: bold;
+  height: 4rem;
 }

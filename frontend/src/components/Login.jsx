@@ -34,9 +34,9 @@ const Login = () => {
 
   return (
     <div className="Login">
-      {/* <div>
+      <div>
         <h1 className="LoginHeading">Login</h1>
-      </div> */}
+      </div>
   
       <input
         className="LoginInputBox"

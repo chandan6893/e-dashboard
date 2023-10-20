@@ -12,38 +12,44 @@ const  logout=()=>{
 
   return (
     <div className="Nav">
-      <ul>
-        <li>
-          <Link to="/">products</Link>
-        </li>
-        <li>
-          <Link to="/add">Add Product</Link>
-        </li>
-        <li>
-          <Link to="/update">Update Product</Link>
-        </li>
-        <li>
-          <Link to="/profile">Profile</Link>
-        </li>
-        
-          {auth ? (
-            <li>
-              <Link to="/signup" onClick={logout}>
-                Logout
-              </Link>
-            </li>
-          ) : (
-            <>
-              <li>
-                <Link to="/signup">SignUp</Link>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-            </>
-          )}
-       
-      </ul>
+      <img
+        src="https://s3u.tmimgcdn.com/u8265365/49e7f3f6c7a60ec8b0aea61cd17de1f5.jpg"
+        alt="Logo"
+        className="NavLogo"
+      />
+      {auth ? (
+        <ul className="ProductNavContainer1">
+          <li>
+            <Link to="/">products</Link>
+          </li>
+          <li>
+            <Link to="/add">Add Product</Link>
+          </li>
+          <li>
+            <Link to="/update">Update Product</Link>
+          </li>
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+          <li>
+            <Link to="/signup" onClick={logout}>
+              <div>{JSON.parse(auth).name}</div>
+              <div>Logout</div>
+            </Link>
+          </li>
+        </ul>
+      ) : (
+        <div className="Container2">
+          <div className="ProductsSignUpLogin">
+            <div>
+              <Link to="/signup">SignUp</Link>
+            </div>
+            <div>
+              <Link to="/login">Login</Link>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
