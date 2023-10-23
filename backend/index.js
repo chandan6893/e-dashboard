@@ -7,8 +7,9 @@ const Product = require("./db/Product");
 const app=express();
 
 app.use(express.json())
- app.use(cors());
+app.use(cors());
 
+// Register API
 app.post('/register',async(req,res)=>{
     let user=new User(req.body);
     let result=await user.save()
@@ -19,6 +20,7 @@ app.post('/register',async(req,res)=>{
    
 })
 
+// Login API
 app.post("/login",async(req,res)=>{
 //   console.log(req.body)
     if (req.body.email && req.body.password) {
@@ -34,13 +36,24 @@ app.post("/login",async(req,res)=>{
     
 })
 
-// products api
+// add-products api
 
 app.post("/add-product",async (req,res)=>{
   let product= new Product(req.body);
   let result= await product.save();
   res.send(result);
   console.log(result)
+});
+
+
+// ****************************PRODUCTS API**************************************/
+app.get("/products",async(req,res)=>{
+  let products=await Product.find();
+  if(products.length>0){
+    res.send(products);
+  }else{
+    res.send({result:"products not found"})
+  }
 })
 
 app.listen(5000);

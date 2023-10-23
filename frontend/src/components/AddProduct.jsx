@@ -5,8 +5,17 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [company, setCompany] = useState("");
+  const [error,setError]=useState(false)
 
   const addProduct=async()=>{
+
+    console.log(!name)
+    if(!name || !price || !category || !company){
+      setError(true);
+      return false
+    }
+
+
     // console.log(name,price,category,company)
     const userId=JSON.parse(localStorage.getItem("user"))._id
     // console.log(userId)
@@ -33,6 +42,9 @@ const AddProduct = () => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
+      {error && !name && (
+        <span className="invalidInput">please enter valid name</span>
+      )}
       <input
         className="AddProductInputBox"
         type="text"
@@ -41,21 +53,30 @@ const AddProduct = () => {
         onChange={(e) => setPrice(e.target.value)}
         autoComplete="new-password"
       />
+      {error && !price && (
+        <span className="invalidInput">please enter valid price</span>
+      )}
       <input
         className="AddProductInputBox"
-        type="password"
+        type="text"
         placeholder="Please Enter Product Category"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
         autoComplete="new-password"
       />
+      {error && !category && (
+        <span className="invalidInput">please enter valid category</span>
+      )}
       <input
         className="AddProductInputBox"
-        type="password"
+        type="text"
         placeholder="Please Enter Product Company"
         value={company}
         onChange={(e) => setCompany(e.target.value)}
       />
+      {error && !company && (
+        <span className="invalidInput">please enter valid company</span>
+      )}
       <button className="AddProductBtn" type="button" onClick={addProduct}>
         SignUp
       </button>

@@ -178,3 +178,9 @@ a{
   cursor: pointer;
   color: #fff;
 }
+
+.invalidInput{
+  color: red;
+  margin-top: -18px;
+  margin-left: -250px;
+}
