@@ -184,3 +184,24 @@ a{
   margin-top: -18px;
   margin-left: -250px;
 }
+
+
+/* productList */
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  margin-top: 3rem;
+  width: 100%;
+}
+th{
+color: royalblue;
+}
+td, th {
+  border: 2px solid royalblue;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
