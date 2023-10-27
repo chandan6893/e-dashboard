@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
   const [name,setName]=useState("");
@@ -6,6 +7,8 @@ const AddProduct = () => {
   const [category, setCategory] = useState("");
   const [company, setCompany] = useState("");
   const [error,setError]=useState(false)
+
+  const navigate = useNavigate();
 
   const addProduct=async()=>{
 
@@ -28,6 +31,7 @@ const AddProduct = () => {
 
     });
     result=await result.json();
+    navigate("/")
     console.log(result)
   }
   return (
@@ -78,7 +82,7 @@ const AddProduct = () => {
         <span className="invalidInput">please enter valid company</span>
       )}
       <button className="AddProductBtn" type="button" onClick={addProduct}>
-        SignUp
+        Add Product
       </button>
     </div>
   );

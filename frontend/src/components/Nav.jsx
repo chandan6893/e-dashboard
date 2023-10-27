@@ -28,14 +28,14 @@ const  logout=()=>{
             <Link to="/add">Add Product</Link>
           </li>
           <li>
-            <Link to="/update">Update Product</Link>
+            <Link to="/update/:id">Update Product</Link>
           </li>
           <li>
             <Link to="/profile">Profile</Link>
           </li>
-          <li>
+          <li className="NavUserProfileANdLogout">
+            <div>{JSON.parse(auth).name}</div>
             <Link to="/signup" onClick={logout}>
-              <div>{JSON.parse(auth).name}</div>
               <div>Logout</div>
             </Link>
           </li>

@@ -52,8 +52,23 @@ app.get("/products",async(req,res)=>{
   if(products.length>0){
     res.send(products);
   }else{
-    res.send({result:"products not found"})
+    res.send({result:"products not found"});
   }
 })
+
+// *****************Delete API********
+app.delete("/product/:id",async(req,res)=>{
+  let result=await Product.deleteOne({_id:req.params.id});
+  res.send(result)
+});
+
+app.get("/product/:id",async(req,res)=>{
+  let result = await Product.findOne({_id:req.params.id});
+  if(result){
+    res.send(result)
+  }else{
+    res.send({resut:"record not found"})
+  }
+});
 
 app.listen(5000);

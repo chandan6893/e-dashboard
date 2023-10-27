@@ -40,6 +40,10 @@ body{
   align-items: center;
   background-color: royalblue;
 }
+.NavUserProfileANdLogout{
+  display: flex;
+  gap: 15px;
+}
 
 /* Footer */
 .Footer{
@@ -187,15 +191,21 @@ a{
 
 
 /* productList */
+.ProductList{
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  margin-top: 3rem;
-  width: 100%;
+  /* margin-top: 3rem; */
+  width: 90%;
 }
 th{
 color: royalblue;
 }
+
 td, th {
   border: 2px solid royalblue;
   text-align: center;
@@ -205,3 +215,5 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+/* update Product */
