@@ -10,8 +10,20 @@ const UpdateProduct = () => {
 
   const navigate = useNavigate();
   const params=useParams();
- const updateProduct=()=>{
-    console.log(name,price,category,company)
+
+ const updateProduct=async()=>{
+    // console.log(name,price,category,company)
+  let result = await fetch(`http://localhost:5000/product/${params.id}`, {
+    method: "put",
+    body: JSON.stringify({ name, price, category, company }),
+    headers:{
+      "Content-Type":"application/json"
+    }
+  });
+  result=await result.json();
+
+  console.log(result);
+  navigate("/")
  }
 
  useEffect(()=>{
