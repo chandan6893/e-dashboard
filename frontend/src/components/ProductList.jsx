@@ -50,7 +50,12 @@ const deleteProduct=async(id)=>{
                   <button onClick={() => deleteProduct(product._id)}>
                     Delete
                   </button>
-                  <Link to={`/update/${product._id}`}>Update Product</Link>
+                  <Link
+                    to={`/update/${product._id}`}
+                    style={{ color: "green" }}
+                  >
+                    <button>Update Product</button>
+                  </Link>
                 </td>
               </tr>
             ))}

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate,useParams } from "react-router-dom";
 
 const UpdateProduct = () => {
   const [name, setName] = useState("");
@@ -9,9 +9,25 @@ const UpdateProduct = () => {
 
 
   const navigate = useNavigate();
+  const params=useParams();
  const updateProduct=()=>{
     console.log(name,price,category,company)
  }
+
+ useEffect(()=>{
+  console.log(params)
+  getProductDetails();
+ },[]);
+
+ const getProductDetails = async () => {
+   let result = await fetch(`http://localhost:5000/product/${params.id}`);
+   result = await result.json();
+   console.log(result);
+   setName(result.name);
+   setPrice(result.price);
+   setCategory(result.category);
+   setCompany(result.company);
+ };
  
   return (
     <div className="AddProduct">
