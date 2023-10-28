@@ -70,7 +70,7 @@ app.get("/product/:id",async(req,res)=>{
     res.send({resut:"record not found"})
   }
 });
-
+// update API
 app.put("/product/:id",async(req,res)=>{
   let result =await Product.updateOne(
     {_id:req.params.id},
@@ -80,6 +80,18 @@ app.put("/product/:id",async(req,res)=>{
   );
   console.log(result)
   res.send(result)
-})
+});
+
+// Search API for Product
+app.get("/search/:key",async(req,res)=>{
+  let result = await Product.find({
+    $or: [
+      { name: { $regex: req.params.key } },
+      { company: { $regex: req.params.key } },
+      { category: { $regex: req.params.key } },
+    ],
+  });
+  res.send(result);
+});
 
 app.listen(5000);
