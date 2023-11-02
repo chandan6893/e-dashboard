@@ -25,9 +25,25 @@ const deleteProduct=async(id)=>{
   // if
 }
 
+const handleSearch=async(e)=>{
+  let key=e.target.value;
+  if(key){
+    let result = await fetch(`http://localhost:5000/search/${key}`);
+    result = await result.json();
+    // console.log(result);
+    setProducts(result);
+  }else{
+    getProducts();
+  }
+  
+}
+
 
   return (
     <div className="ProductList">
+      <div >
+        <input type="text" placeholder='Search....' onChange={handleSearch}  />
+      </div>
       <table>
         <thead>
           <tr>
