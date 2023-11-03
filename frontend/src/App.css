@@ -194,7 +194,21 @@ a{
 .ProductList{
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 5rem;
+  flex-direction: column;
+}
+.ProductListInputContainer{
+  margin-bottom: 2rem;
+}
+.ProductListInputContainer input{
+  background-color: #dddddd;
+  color: black;
+  padding: 22px 8px;
+  border-radius: 3px;
+  border: 1px solid black;
+  outline: none;
+  font-size: large;
 }
 table {
   font-family: arial, sans-serif;

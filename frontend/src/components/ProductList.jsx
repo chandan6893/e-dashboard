@@ -31,7 +31,10 @@ const handleSearch=async(e)=>{
     let result = await fetch(`http://localhost:5000/search/${key}`);
     result = await result.json();
     // console.log(result);
-    setProducts(result);
+    if(result){
+      setProducts(result);
+    }
+    
   }else{
     getProducts();
   }
@@ -41,8 +44,13 @@ const handleSearch=async(e)=>{
 
   return (
     <div className="ProductList">
-      <div >
-        <input type="text" placeholder='Search....' onChange={handleSearch}  />
+      <div className="ProductListInputContainer">
+        <input
+          style={{ width: "45rem", height: "2.5rem" }}
+          type="text"
+          placeholder="Search...."
+          onChange={handleSearch}
+        />
       </div>
       <table>
         <thead>
@@ -55,7 +63,7 @@ const handleSearch=async(e)=>{
           </tr>
         </thead>
         <tbody>
-          {products.length > 0 &&
+          {products.length > 0 ? (
             products.map((product, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
@@ -74,7 +82,10 @@ const handleSearch=async(e)=>{
                   </Link>
                 </td>
               </tr>
-            ))}
+            ))
+          ) : (
+            <h2>No Result Found</h2>
+          )}
         </tbody>
       </table>
     </div>
