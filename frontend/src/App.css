@@ -210,6 +210,11 @@ a{
   outline: none;
   font-size: large;
 }
+.ProductListNoResultFound{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;

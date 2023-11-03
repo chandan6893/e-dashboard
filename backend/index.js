@@ -6,8 +6,13 @@ const User = require('./db/User');
 const Product = require("./db/Product");
 const app=express();
 
+const Jwt=require("jsonwebtoken");
+const  jwtKey="e-comm";
+// jwtKey should/must be secret.we can keep it in environment(env) file 
+
 app.use(express.json())
 app.use(cors());
+
 
 // Register API
 app.post('/register',async(req,res)=>{
@@ -16,7 +21,15 @@ app.post('/register',async(req,res)=>{
     result=result.toObject();
     delete result.password;
     console.log(result)
-    res.send(result)
+    
+    Jwt.sign({ result }, jwtKey, { expiresIn: "3h" }, (err, token) => {
+      if (err) {
+        res.send({
+          result: "something  went wrong ,please try after some time",
+        });
+      }
+      res.send({ result, auth: token });
+    });
    
 })
 
@@ -26,7 +39,15 @@ app.post("/login",async(req,res)=>{
     if (req.body.email && req.body.password) {
       let user = await User.findOne(req.body).select("-password");
       if (user) {
-        res.send(user);
+        Jwt.sign({ user }, jwtKey, { expiresIn: "3h" }, (err, token) => {
+          if (err) {
+            res.send({
+              result: "something  went wrong ,please try after some time",
+            })
+          }
+          res.send({ user, auth: token })
+        })
+        // res.send(user)
       } else {
         res.send({ result: "No User Found" });
       }

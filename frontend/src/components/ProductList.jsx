@@ -84,7 +84,7 @@ const handleSearch=async(e)=>{
               </tr>
             ))
           ) : (
-            <h2>No Result Found</h2>
+            <h2 className="ProductListNoResultFound">No Result Found</h2>
           )}
         </tbody>
       </table>
