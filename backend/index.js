@@ -1,6 +1,9 @@
 const express=require("express");
 const cors=require('cors');
 
+const path = require("path");
+
+
 require('./db/config');
 const User = require('./db/User');
 const Product = require("./db/Product");
@@ -12,6 +15,18 @@ const  jwtKey="e-comm";
 
 app.use(express.json())
 app.use(cors());
+
+
+
+
+const port = process.env.PORT || 5000;
+// Serve static files from the 'build' folder
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+// Serve the React app for any other route
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
 
 
 // Register API
@@ -141,4 +156,7 @@ function verifyTokenMiddleware(req,res,next){
 
 
 
-app.listen(5000);
+// app.listen(5000);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
