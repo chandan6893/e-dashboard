@@ -22,13 +22,13 @@ const AddProduct = () => {
     // console.log(name,price,category,company)
     const userId=JSON.parse(localStorage.getItem("user"))._id
     // console.log(userId)
-    let result = await fetch("http://localhost:5000/add-product",{
-      method:"post",
-      body:JSON.stringify({name,price,category,company,userId}),
-      headers:{
-        "Content-Type":"application/json"
-      }
-
+    let result = await fetch("http://localhost:5000/add-product", {
+      method: "post",
+      body: JSON.stringify({ name, price, category, company, userId }),
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+      },
     });
     result=await result.json();
     navigate("/")

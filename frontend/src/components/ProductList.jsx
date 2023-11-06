@@ -8,27 +8,38 @@ useEffect(()=>{
 },[]);
 
 const getProducts=async()=>{
-    let result = await fetch("http://localhost:5000/products");
+    let result = await fetch("http://localhost:5000/products", {
+      headers: {
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`
+      },
+    });
     result =await result.json();
     setProducts(result);
 }
 
 const deleteProduct=async(id)=>{
-  let result = await fetch(`http://localhost:5000/product/${id}`,{
-  method:"Delete"
+  let result = await fetch(`http://localhost:5000/product/${id}`, {
+    method: "Delete",
+    headers: {
+      authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+    },
   });
   result=await result.json();
   if(result){
     getProducts();
   }
 
-  // if
+  
 }
 
 const handleSearch=async(e)=>{
   let key=e.target.value;
   if(key){
-    let result = await fetch(`http://localhost:5000/search/${key}`);
+    let result = await fetch(`http://localhost:5000/search/${key}`, {
+      headers: {
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+      },
+    });
     result = await result.json();
     // console.log(result);
     if(result){
@@ -63,7 +74,7 @@ const handleSearch=async(e)=>{
           </tr>
         </thead>
         <tbody>
-          {products.length > 0 ? (
+          {products.length > 0 && (
             products.map((product, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
@@ -83,9 +94,7 @@ const handleSearch=async(e)=>{
                 </td>
               </tr>
             ))
-          ) : (
-            <h2 className="ProductListNoResultFound">No Result Found</h2>
-          )}
+          ) }
         </tbody>
       </table>
     </div>
@@ -93,3 +102,7 @@ const handleSearch=async(e)=>{
 }
 
 export default ProductList;
+
+
+
+

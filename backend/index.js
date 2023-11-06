@@ -22,7 +22,7 @@ app.post('/register',async(req,res)=>{
     delete result.password;
     console.log(result)
     
-    Jwt.sign({ result }, jwtKey, { expiresIn: "3h" }, (err, token) => {
+    Jwt.sign({ result }, jwtKey, { expiresIn: "36h" }, (err, token) => {
       if (err) {
         res.send({
           result: "something  went wrong ,please try after some time",
@@ -39,7 +39,7 @@ app.post("/login",async(req,res)=>{
     if (req.body.email && req.body.password) {
       let user = await User.findOne(req.body).select("-password");
       if (user) {
-        Jwt.sign({ user }, jwtKey, { expiresIn: "3h" }, (err, token) => {
+        Jwt.sign({ user }, jwtKey, { expiresIn: "36h" }, (err, token) => {
           if (err) {
             res.send({
               result: "something  went wrong ,please try after some time",
@@ -59,54 +59,54 @@ app.post("/login",async(req,res)=>{
 
 // add-products api
 
-app.post("/add-product",async (req,res)=>{
-  let product= new Product(req.body);
-  let result= await product.save();
+app.post("/add-product", verifyTokenMiddleware, async (req, res) => {
+  let product = new Product(req.body);
+  let result = await product.save();
   res.send(result);
-  console.log(result)
+  console.log(result);
 });
 
 
 // ****************************PRODUCTS API**************************************/
-app.get("/products",async(req,res)=>{
-  let products=await Product.find();
-  if(products.length>0){
+app.get("/products", verifyTokenMiddleware, async (req, res) => {
+  let products = await Product.find();
+  if (products.length > 0) {
     res.send(products);
-  }else{
-    res.send({result:"products not found"});
+  } else {
+    res.send({ result: "products not found" });
   }
-})
-
-// *****************Delete API********
-app.delete("/product/:id",async(req,res)=>{
-  let result=await Product.deleteOne({_id:req.params.id});
-  res.send(result)
 });
 
-app.get("/product/:id",async(req,res)=>{
-  let result = await Product.findOne({_id:req.params.id});
-  if(result){
-    res.send(result)
-  }else{
-    res.send({resut:"record not found"})
+// *****************Delete API********
+app.delete("/product/:id", verifyTokenMiddleware, async (req, res) => {
+  let result = await Product.deleteOne({ _id: req.params.id });
+  res.send(result);
+});
+
+app.get("/product/:id", verifyTokenMiddleware, async (req, res) => {
+  let result = await Product.findOne({ _id: req.params.id });
+  if (result) {
+    res.send(result);
+  } else {
+    res.send({ resut: "record not found" });
   }
 });
 // update API
-app.put("/product/:id",async(req,res)=>{
-  let result =await Product.updateOne(
-    {_id:req.params.id},
+app.put("/product/:id", verifyTokenMiddleware, async (req, res) => {
+  let result = await Product.updateOne(
+    { _id: req.params.id },
     {
-      $set:req.body
+      $set: req.body,
     }
   );
-  console.log(result)
-  res.send(result)
+  console.log(result);
+  res.send(result);
 });
 
 // Search API for Product
-app.get("/search/:key",async(req,res)=>{
+app.get("/search/:key", verifyTokenMiddleware, async (req, res) => {
   let result = await Product.find({
-    $or: [
+    "$or": [
       { name: { $regex: req.params.key } },
       { company: { $regex: req.params.key } },
       { category: { $regex: req.params.key } },
@@ -114,5 +114,31 @@ app.get("/search/:key",async(req,res)=>{
   });
   res.send(result);
 });
+
+
+// Auth Token Verification
+function verifyTokenMiddleware(req,res,next){
+  let token = req.headers["authorization"];
+  if(token){
+    token=token.split(' ')[1];
+    console.log("middleware called",token)
+
+    Jwt.verify(token,jwtKey,(err,valid)=>{
+      if(err){
+        res.status(401).send({ result: "Please Provide valid Token " });
+      }else{
+        next();
+      }
+    })
+
+  }else{
+    res.status(403).send({result:"Please Add Token With header"})
+  }
+  
+}
+
+
+
+
 
 app.listen(5000);
